@@ -1,0 +1,55 @@
+name: Create builder.toml
+
+on:
+  schedule:
+  - cron: '*/15 * * * *'
+
+jobs:
+  create:
+    name: Create builder.toml
+    runs-on: ubuntu-latest
+    steps:
+    - name: Check out
+      uses: actions/checkout@v2
+
+    - name: Checkout branch
+      uses: paketo-buildpacks/github-config/actions/pull-request/checkout-branch@main
+      with:
+        branch: "automation/builder-toml"
+
+    - name: Generate builder.toml
+      id: generate-builder-toml
+      uses: paketo-buildpacks/github-config/actions/builder/generate-builder-toml@main
+      with:
+        stack: "io.buildpacks.stacks.bionic"
+        build-image: "index.docker.io/paketobuildpacks/build"
+        run-image: "index.docker.io/paketobuildpacks/run"
+        run-image-mirrors: "gcr.io/paketo-buildpacks/run"
+        stack-image-tag: "full-cnb"
+        order-file: "./order.toml"
+        registry-server: "gcr.io"
+
+    - name: Write builder.toml
+      run: |
+        echo '${{ steps.generate-builder-toml.outputs.builder_toml }}' > builder.toml
+
+    - name: Git commit
+      id: commit
+      uses: paketo-buildpacks/github-config/actions/pull-request/create-commit@main
+      with:
+        message: "Update builder.toml"
+        pathspec: "builder.toml"
+
+    - name: Git push
+      if: ${{ steps.commit.outputs.commit_sha != '' }}
+      uses: paketo-buildpacks/github-config/actions/pull-request/push-branch@main
+      with:
+        branch: "automation/builder-toml"
+
+    - name: Open Pull Request
+      if: ${{ steps.commit.outputs.commit_sha != '' }}
+      uses: paketo-buildpacks/github-config/actions/pull-request/open@main
+      with:
+        token: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
+        title: "Updating builder.toml"
+        branch: "automation/builder-toml"
