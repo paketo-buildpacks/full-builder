@@ -1,12 +1,12 @@
-name: Create builder.toml
+name: Update builder.toml and Send Pull Request
 
 on:
   schedule:
   - cron: '*/15 * * * *'
 
 jobs:
-  create:
-    name: Create builder.toml
+  update:
+    name: Update builder.toml
     runs-on: ubuntu-latest
     steps:
     - name: Check out
@@ -19,15 +19,10 @@ jobs:
 
     - name: Generate builder.toml
       id: generate-builder-toml
-      uses: paketo-buildpacks/github-config/actions/builder/generate-builder-toml@main
+      uses: paketo-buildpacks/github-config/actions/builder/update@main
       with:
-        stack: "io.buildpacks.stacks.bionic"
-        build-image: "index.docker.io/paketobuildpacks/build"
-        run-image: "index.docker.io/paketobuildpacks/run"
-        run-image-mirrors: "gcr.io/paketo-buildpacks/run"
-        stack-image-tag: "full-cnb"
-        order-file: "./order.toml"
-        registry-server: "gcr.io"
+        builder-file: builder.toml
+        registry-server: gcr.io
 
     - name: Write builder.toml
       run: |

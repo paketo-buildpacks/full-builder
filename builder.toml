@@ -1,0 +1,100 @@
+description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, Golang, PHP, HTTPD and NGINX"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/dotnet-core:0.0.8"
+  version = "0.0.8"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/go:0.1.0"
+  version = "0.1.0"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/httpd:0.0.164"
+  version = "0.0.164"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/java-native-image:3.3.2"
+  version = "3.3.2"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/java:3.3.0"
+  version = "3.3.0"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/nginx:0.0.193"
+  version = "0.0.193"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/nodejs:0.0.7"
+  version = "0.0.7"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/php:0.0.9"
+  version = "0.0.9"
+
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/procfile:2.0.2"
+  version = "2.0.2"
+
+[lifecycle]
+  version = "0.9.1"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/java-native-image"
+    version = "3.3.2"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/java"
+    version = "3.3.0"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/nodejs"
+    version = "0.0.7"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/go"
+    version = "0.1.0"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/dotnet-core"
+    version = "0.0.8"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/php"
+    version = "0.0.9"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/httpd"
+    version = "0.0.164"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/nginx"
+    version = "0.0.193"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/procfile"
+    version = "2.0.2"
+
+[stack]
+  id = "io.buildpacks.stacks.bionic"
+  build-image = "index.docker.io/paketobuildpacks/build:0.0.74-full-cnb"
+  run-image = "index.docker.io/paketobuildpacks/run:full-cnb"
+  run-image-mirrors = ["gcr.io/paketo-buildpacks/run:full-cnb"]
