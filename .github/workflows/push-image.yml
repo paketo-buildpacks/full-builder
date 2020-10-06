@@ -19,6 +19,11 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Install Pack
+      run : |
+        (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.13.1/pack-v0.13.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
+        sudo chmod +x /usr/local/bin/pack
+
     - name: Create Builder Image
       run: |
         pack create-builder builder-tmp --config builder.toml

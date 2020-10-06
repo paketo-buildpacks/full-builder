@@ -97,4 +97,4 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
   id = "io.buildpacks.stacks.bionic"
   build-image = "index.docker.io/paketobuildpacks/build:0.0.74-full-cnb"
   run-image = "index.docker.io/paketobuildpacks/run:full-cnb"
-  run-image-mirrors = ["gcr.io/paketo-buildpacks/run:full-cnb"]
+  run-image-mirrors = []
