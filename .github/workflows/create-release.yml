@@ -1,4 +1,4 @@
-name: Create Draft Release
+name: Create Release
 
 on:
   push:
@@ -65,4 +65,4 @@ jobs:
         target_commitish: ${{ github.sha }}
         name: v${{ steps.tag.outputs.tag }}
         body: "See builder.toml file"
-        draft: true
+        draft: false
