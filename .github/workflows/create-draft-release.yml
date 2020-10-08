@@ -11,10 +11,13 @@ jobs:
     runs-on: ubuntu-latest
     steps:
 
+    # Use :latest image when we have confidence in latest releases
+    # Current latest (0.14.0) has a runtime error
     - name: Install Pack
-      run : |
-        (curl -sSL "https://github.com/buildpacks/pack/releases/download/v0.13.1/pack-v0.13.1-linux.tgz" | sudo tar -C /usr/local/bin/ --no-same-owner -xzv pack)
-        sudo chmod +x /usr/local/bin/pack
+      run: |
+        id=$(docker create buildpacksio/pack:0.14.0)
+        sudo docker cp $id:/layers/paketo-buildpacks_go-build/targets/bin/pack /usr/local/bin/
+        docker rm -v $id
 
     - name: Checkout
       uses: actions/checkout@v2
