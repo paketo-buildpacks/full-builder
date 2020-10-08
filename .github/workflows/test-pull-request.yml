@@ -1,0 +1,56 @@
+name: Test Pull Request
+
+on:
+  pull_request:
+    branches:
+    - main
+
+jobs:
+
+  smoke:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+
+    # Use :latest image when we have confidence in latest releases
+    # Current latest (0.14.0) has a runtime error
+    - name: Install Pack
+      run: |
+        id=$(docker create buildpacksio/pack:0.14.0)
+        sudo docker cp $id:/layers/paketo-buildpacks_go-build/targets/bin/pack /usr/local/bin/
+        docker rm -v $id
+
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: builder-repo
+
+    - name: Checkout paketo samples
+      uses: actions/checkout@v2
+      with:
+        repository: paketo-buildpacks/samples
+        path: samples
+
+    - name: Run smoke tests
+      run: |
+        pack create-builder testbuilder --config builder-repo/builder.toml
+        pack build testapp -p samples/nodejs/yarn --builder testbuilder
+        pack build testapp -p samples/go/mod --builder testbuilder
+        pack build testapp -p samples/java/maven --builder testbuilder
+
+  approve:
+    name: Auto Approve
+    if: ${{ github.event.pull_request.user.login == 'paketo-bot' || github.event.pull_request.user.login == 'dependabot[bot]' }}
+    runs-on: ubuntu-latest
+    needs: smoke
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Approve
+      uses: paketo-buildpacks/github-config/actions/pull-request/approve@main
+      with:
+        user: paketo-bot-reviewer
+        token: ${{ secrets.PAKETO_BOT_REVIEWER_GITHUB_TOKEN }}
+        author: ${{ github.event.pull_request.user.login }}
+        number: ${{ github.event.number }}
