@@ -45,8 +45,8 @@ jobs:
     - name: Compare With Previous Commit
       uses: actions/checkout/@v2
       with:
-        fetch-depth: 2
-    - run: if [ -z "$(git diff HEAD^ -- builder.toml)" ]; then exit 1; else exit 0; fi
+        fetch-depth: 0 # gets full history
+    - run: if [ -z "$(git diff $(git describe --tags --abbrev=0) -- builder.toml)" ]; then exit 1; else exit 0; fi
 
   release:
     name: Release
@@ -76,4 +76,4 @@ jobs:
         target_commitish: ${{ github.sha }}
         name: v${{ steps.tag.outputs.tag }}
         body: "See builder.toml file"
-        draft: true
+        draft: false
