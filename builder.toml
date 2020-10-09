@@ -95,5 +95,5 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 
 [stack]
   id = "io.buildpacks.stacks.bionic"
-  build-image = "docker.io/paketobuildpacks/build:0.0.78-full-cnb"
+  build-image = "docker.io/paketobuildpacks/build:0.0.79-full-cnb"
   run-image = "index.docker.io/paketobuildpacks/run:full-cnb"
