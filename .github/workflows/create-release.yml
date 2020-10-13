@@ -52,9 +52,9 @@ jobs:
         output_string="::set-output name=builder_changes"
         if [ -z "$(git diff $(git describe --tags --abbrev=0) -- builder.toml)" ]
         then
-          echo "${output_string}=false"
+          echo "${output_string}::false"
         else
-          echo "${output_string}=true"
+          echo "${output_string}::true"
         fi
     - name: Checkout
       if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
