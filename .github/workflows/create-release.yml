@@ -49,18 +49,12 @@ jobs:
     - name: Compare With Previous Release
       id: compare_previous_release
       run: |
-        output_string="::set-output name=builder_changes"
         if [ -z "$(git diff $(git describe --tags --abbrev=0) -- builder.toml)" ]
         then
-          echo "${output_string}::false"
+          echo "::set-output name=builder_changes::false"
         else
-          echo "${output_string}::true"
+          echo "::set-output name=builder_changes::true"
         fi
-    - name: Checkout
-      if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
-      uses: actions/checkout@v2
-    - if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
-      run: git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
     - name: Reset Draft Release
       id: reset
       if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
