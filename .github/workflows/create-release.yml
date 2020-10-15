@@ -1,4 +1,4 @@
-name: Create Draft Release
+name: Create Release
 
 on:
   push:
@@ -42,21 +42,25 @@ jobs:
     runs-on: ubuntu-latest
     needs: smoke
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-    - run: git fetch --depth=1 origin +refs/tags/*:refs/tags/* || true
-    - name: Reset Draft Release
-      id: reset
-      uses: paketo-buildpacks/github-config/actions/release/reset-draft@main
+    - name: Checkout With History
+      uses: actions/checkout/@v2
       with:
-        repo: ${{ github.repository }}
-        token: ${{ github.token }}
+        fetch-depth: 0 # gets full history
+    - name: Compare With Previous Release
+      id: compare_previous_release
+      run: |
+        if [ -z "$(git diff $(git describe --tags --abbrev=0) -- builder.toml)" ]
+        then
+          echo "::set-output name=builder_changes::false"
+        else
+          echo "::set-output name=builder_changes::true"
+        fi
     - name: Tag
       id: tag
+      if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
       uses: paketo-buildpacks/github-config/actions/tag@main
-      with:
-        current_version: ${{ steps.reset.outputs.current_version }}
     - name: Create Release
+      if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
       uses: paketo-buildpacks/github-config/actions/release/create@main
       with:
         repo: ${{ github.repository }}
@@ -65,4 +69,4 @@ jobs:
         target_commitish: ${{ github.sha }}
         name: v${{ steps.tag.outputs.tag }}
         body: "See builder.toml file"
-        draft: true
+        draft: false
