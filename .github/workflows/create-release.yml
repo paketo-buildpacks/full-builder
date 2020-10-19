@@ -9,6 +9,8 @@ jobs:
   smoke:
     name: Smoke Test
     runs-on: ubuntu-latest
+    outputs:
+      release_notes: ${{ steps.notes.outputs.body }}
     steps:
 
     # Use :latest image when we have confidence in latest releases
@@ -32,10 +34,19 @@ jobs:
 
     - name: Run smoke tests
       run: |
-        pack create-builder testbuilder --config builder-repo/builder.toml
-        pack build testapp -p samples/nodejs/yarn --builder testbuilder
-        pack build testapp -p samples/go/mod --builder testbuilder
-        pack build testapp -p samples/java/maven --builder testbuilder
+        pack create-builder builder --config builder-repo/builder.toml
+        pack build testapp -p samples/nodejs/yarn --builder builder
+        pack build testapp -p samples/go/mod --builder builder
+        pack build testapp -p samples/java/maven --builder builder
+
+    - name: Generate Release Notes
+      id: notes
+      run: |
+        notes="$(pack inspect-builder builder | grep -v 'Inspecting builder' | grep -v 'REMOTE:' | grep -v 'LOCAL:' | grep -v '\(not present\)' | sed -e '/./,$!d')"
+        notes="${notes//'%'/'%25'}"
+        notes="${notes//$'\n'/'%0A'}"
+        notes="${notes//$'\r'/'%0D'}"
+        echo "::set-output name=body::${notes}"
 
   release:
     name: Release
@@ -68,5 +79,8 @@ jobs:
         tag_name: v${{ steps.tag.outputs.tag }}
         target_commitish: ${{ github.sha }}
         name: v${{ steps.tag.outputs.tag }}
-        body: "See builder.toml file"
+        body: |
+          ```
+          ${{ needs.smoke.outputs.release_notes }}
+          ```
         draft: false
