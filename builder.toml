@@ -5,8 +5,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
   version = "0.0.8"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/go:0.2.0"
-  version = "0.2.0"
+  image = "gcr.io/paketo-buildpacks/go:0.2.1"
+  version = "0.2.1"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/httpd:0.0.164"
@@ -61,7 +61,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 
   [[order.group]]
     id = "paketo-buildpacks/go"
-    version = "0.2.0"
+    version = "0.2.1"
 
 [[order]]
 
