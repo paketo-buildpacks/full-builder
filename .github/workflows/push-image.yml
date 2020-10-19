@@ -37,10 +37,8 @@ jobs:
         PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD }}
       run: |
         echo "${PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD}" | docker login --username "${PAKETO_BUILDPACKS_DOCKERHUB_USER}" --password-stdin
-        docker tag builder "paketobuildpacks/builder:latest"
         docker tag builder "paketobuildpacks/builder:full"
         docker tag builder "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-full"
 
-        docker push "paketobuildpacks/builder:latest"
         docker push "paketobuildpacks/builder:full"
         docker push "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-full"
