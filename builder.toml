@@ -13,12 +13,12 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
   version = "0.0.164"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/java-native-image:3.4.0"
-  version = "3.4.0"
+  image = "gcr.io/paketo-buildpacks/java-native-image:3.5.0"
+  version = "3.5.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/java:3.5.0"
-  version = "3.5.0"
+  image = "gcr.io/paketo-buildpacks/java:3.6.0"
+  version = "3.6.0"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/nginx:0.0.193"
@@ -43,13 +43,13 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 
   [[order.group]]
     id = "paketo-buildpacks/java-native-image"
-    version = "3.4.0"
+    version = "3.5.0"
 
 [[order]]
 
   [[order.group]]
     id = "paketo-buildpacks/java"
-    version = "3.5.0"
+    version = "3.6.0"
 
 [[order]]
 
