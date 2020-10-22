@@ -5,20 +5,20 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
   version = "0.0.8"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/go:0.2.1"
-  version = "0.2.1"
+  image = "gcr.io/paketo-buildpacks/go:0.2.2"
+  version = "0.2.2"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/httpd:0.0.164"
   version = "0.0.164"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/java-native-image:3.4.0"
-  version = "3.4.0"
+  image = "gcr.io/paketo-buildpacks/java-native-image:3.5.0"
+  version = "3.5.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/java:3.5.0"
-  version = "3.5.0"
+  image = "gcr.io/paketo-buildpacks/java:3.6.0"
+  version = "3.6.0"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/nginx:0.0.193"
@@ -29,27 +29,27 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
   version = "0.0.9"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/php:0.0.10"
-  version = "0.0.10"
+  image = "gcr.io/paketo-buildpacks/php:0.0.11"
+  version = "0.0.11"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/procfile:2.0.3"
   version = "2.0.3"
 
 [lifecycle]
-  version = "0.9.1"
+  version = "0.9.2"
 
 [[order]]
 
   [[order.group]]
     id = "paketo-buildpacks/java-native-image"
-    version = "3.4.0"
+    version = "3.5.0"
 
 [[order]]
 
   [[order.group]]
     id = "paketo-buildpacks/java"
-    version = "3.5.0"
+    version = "3.6.0"
 
 [[order]]
 
@@ -61,7 +61,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 
   [[order.group]]
     id = "paketo-buildpacks/go"
-    version = "0.2.1"
+    version = "0.2.2"
 
 [[order]]
 
@@ -73,7 +73,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 
   [[order.group]]
     id = "paketo-buildpacks/php"
-    version = "0.0.10"
+    version = "0.0.11"
 
 [[order]]
 
@@ -95,6 +95,6 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 
 [stack]
   id = "io.buildpacks.stacks.bionic"
-  build-image = "docker.io/paketobuildpacks/build:0.0.88-full-cnb"
+  build-image = "docker.io/paketobuildpacks/build:0.0.91-full-cnb"
   run-image = "index.docker.io/paketobuildpacks/run:full-cnb"
   run-image-mirrors = ["gcr.io/paketo-buildpacks/run:full-cnb"]
