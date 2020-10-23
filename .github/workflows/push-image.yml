@@ -23,7 +23,7 @@ jobs:
     # Current latest (0.14.0) has a runtime error
     - name: Install Pack
       run: |
-        id=$(docker create buildpacksio/pack:0.14.0)
+        id=$(docker create buildpacksio/pack:0.14.2)
         sudo docker cp $id:/layers/paketo-buildpacks_go-build/targets/bin/pack /usr/local/bin/
         docker rm -v $id
 
