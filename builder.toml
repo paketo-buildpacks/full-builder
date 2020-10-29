@@ -36,6 +36,10 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
   image = "gcr.io/paketo-buildpacks/procfile:2.0.3"
   version = "2.0.3"
 
+[[buildpacks]]
+  image = "gcr.io/paketo-buildpacks/ruby:0.1.2"
+  version = "0.1.2"
+
 [lifecycle]
   version = "0.9.2"
 
@@ -86,6 +90,12 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
   [[order.group]]
     id = "paketo-buildpacks/nginx"
     version = "0.0.193"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/ruby"
+    version = "0.1.2"
 
 [[order]]
 
