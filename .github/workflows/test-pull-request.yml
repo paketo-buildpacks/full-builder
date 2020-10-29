@@ -37,6 +37,7 @@ jobs:
         pack build testapp -p samples/nodejs/yarn --builder testbuilder
         pack build testapp -p samples/go/mod --builder testbuilder
         pack build testapp -p samples/java/maven --builder testbuilder
+        pack build testapp -p samples/ruby/rack/hello_rails --builder testbuilder
 
   approve:
     name: Auto Approve
