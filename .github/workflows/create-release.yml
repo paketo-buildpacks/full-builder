@@ -38,7 +38,7 @@ jobs:
         pack build testapp -p samples/nodejs/yarn --builder builder
         pack build testapp -p samples/go/mod --builder builder
         pack build testapp -p samples/java/maven --builder builder
-        pack build testapp -p samples/ruby/rack/hello_rails --builder testbuilder
+        pack build testapp -p samples/ruby/rack/hello_rails --builder builder
 
     - name: Generate Release Notes
       id: notes
