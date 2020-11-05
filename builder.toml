@@ -46,14 +46,14 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 [[order]]
 
   [[order.group]]
-    id = "paketo-buildpacks/java-native-image"
-    version = "4.0.0"
+    id = "paketo-buildpacks/ruby"
+    version = "0.1.3"
 
 [[order]]
 
   [[order.group]]
-    id = "paketo-buildpacks/java"
-    version = "4.0.0"
+    id = "paketo-buildpacks/dotnet-core"
+    version = "0.0.8"
 
 [[order]]
 
@@ -70,20 +70,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 [[order]]
 
   [[order.group]]
-    id = "paketo-buildpacks/dotnet-core"
-    version = "0.0.8"
-
-[[order]]
-
-  [[order.group]]
     id = "paketo-buildpacks/php"
     version = "0.0.11"
-
-[[order]]
-
-  [[order.group]]
-    id = "paketo-buildpacks/httpd"
-    version = "0.0.165"
 
 [[order]]
 
@@ -94,8 +82,20 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 [[order]]
 
   [[order.group]]
-    id = "paketo-buildpacks/ruby"
-    version = "0.1.3"
+    id = "paketo-buildpacks/httpd"
+    version = "0.0.165"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/java-native-image"
+    version = "4.0.0"
+
+[[order]]
+
+  [[order.group]]
+    id = "paketo-buildpacks/java"
+    version = "4.0.0"
 
 [[order]]
 
