@@ -33,10 +33,10 @@ jobs:
 
     - name: Push
       env:
-        PAKETO_BUILDPACKS_DOCKERHUB_USER: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_USER }}
+        PAKETO_BUILDPACKS_DOCKERHUB_USERNAME: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_USERNAME }}
         PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD }}
       run: |
-        echo "${PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD}" | docker login --username "${PAKETO_BUILDPACKS_DOCKERHUB_USER}" --password-stdin
+        echo "${PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD}" | docker login --username "${PAKETO_BUILDPACKS_DOCKERHUB_USERNAME}" --password-stdin
         docker tag builder "paketobuildpacks/builder:full"
         docker tag builder "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-full"
 
