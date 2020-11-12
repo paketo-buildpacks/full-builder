@@ -33,6 +33,14 @@ jobs:
 
     - name: Push
       env:
+        GCR_PUSH_BOT_JSON_KEY: ${{ secrets.GCR_PUSH_BOT_JSON_KEY }}
+      run: |
+        echo "${GCR_PUSH_BOT_JSON_KEY}" | docker login --username _json_key --password-stdin gcr.io
+        docker tag builder "gcr.io/paketo-buildpacks/builder:full-cf"
+        docker push "gcr.io/paketo-buildpacks/builder:full-cf"
+
+    - name: Push
+      env:
         PAKETO_BUILDPACKS_DOCKERHUB_USERNAME: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_USERNAME }}
         PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD }}
       run: |
