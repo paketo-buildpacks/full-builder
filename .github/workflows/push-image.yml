@@ -37,6 +37,7 @@ jobs:
       run: |
         echo "${GCR_PUSH_BOT_JSON_KEY}" | docker login --username _json_key --password-stdin gcr.io
         docker tag builder "gcr.io/paketo-buildpacks/builder:full-cf"
+
         docker push "gcr.io/paketo-buildpacks/builder:full-cf"
 
     - name: Push
@@ -52,3 +53,16 @@ jobs:
         docker push "paketobuildpacks/builder:full"
         docker push "paketobuildpacks/builder:full-cf"
         docker push "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-full"
+
+    - name: Push
+      env:
+        CLOUDFOUNDRY_DOCKERHUB_USERNAME: ${{ secrets.CLOUDFOUNDRY_DOCKERHUB_USERNAME }}
+        CLOUDFOUNDRY_DOCKERHUB_PASSWORD: ${{ secrets.CLOUDFOUNDRY_DOCKERHUB_PASSWORD }}
+      run: |
+        echo "${CLOUDFOUNDRY_DOCKERHUB_PASSWORD}" | docker login --username "${CLOUDFOUNDRY_DOCKERHUB_USERNAME}" --password-stdin
+        docker tag builder "cloudfoundry/cnb:full-cf"
+        docker tag builder "cloudfoundry/cnb:cflinuxfs3"
+
+        docker push "cloudfoundry/cnb:full-cf"
+        docker push "cloudfoundry/cnb:cflinuxfs3"
+
