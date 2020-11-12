@@ -38,7 +38,9 @@ jobs:
       run: |
         echo "${PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD}" | docker login --username "${PAKETO_BUILDPACKS_DOCKERHUB_USERNAME}" --password-stdin
         docker tag builder "paketobuildpacks/builder:full"
+        docker tag builder "paketobuildpacks/builder:full-cf"
         docker tag builder "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-full"
 
         docker push "paketobuildpacks/builder:full"
+        docker push "paketobuildpacks/builder:full-cf"
         docker push "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-full"
