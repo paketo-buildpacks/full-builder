@@ -1,8 +1,8 @@
 description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, Golang, PHP, HTTPD and NGINX"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/dotnet-core:0.0.8"
-  version = "0.0.8"
+  image = "gcr.io/paketo-buildpacks/dotnet-core:0.0.9"
+  version = "0.0.9"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/go:0.2.4"
@@ -53,7 +53,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET, NodeJS, 
 
   [[order.group]]
     id = "paketo-buildpacks/dotnet-core"
-    version = "0.0.8"
+    version = "0.0.9"
 
 [[order]]
 
