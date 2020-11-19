@@ -13,11 +13,9 @@ jobs:
       release_notes: ${{ steps.notes.outputs.body }}
     steps:
 
-    # Use :latest image when we have confidence in latest releases
-    # Current latest (0.14.0) has a runtime error
     - name: Install Pack
       run: |
-        id=$(docker create buildpacksio/pack:0.14.0)
+        id=$(docker create buildpacksio/pack:latest)
         sudo docker cp $id:/layers/paketo-buildpacks_go-build/targets/bin/pack /usr/local/bin/
         docker rm -v $id
 
