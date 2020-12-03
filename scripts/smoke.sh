@@ -74,9 +74,8 @@ function image::pull::lifecycle() {
   name="${1}"
 
   lifecycle_image="index.docker.io/buildpacksio/lifecycle:$(
-    docker inspect "${name}" \
-      | jq -r '.[0].Config.Labels."io.buildpacks.builder.metadata"' \
-      | jq -r '.lifecycle.version'
+    pack inspect-builder "${name}" --output json \
+      | jq -r '.remote_info.lifecycle.version'
   )"
 
   util::print::title "Pulling lifecycle image..."
