@@ -48,6 +48,7 @@ function main() {
 
   tools::install
   builder::create "${name}"
+  image::pull::lifecycle "${name}"
   tests::run "${name}"
 }
 
@@ -66,6 +67,20 @@ USAGE
 function tools::install() {
   util::tools::pack::install \
     --directory "${BUILDPACKDIR}/.bin"
+}
+
+function image::pull::lifecycle() {
+  local name lifecycle_image
+  name="${1}"
+
+  lifecycle_image="index.docker.io/buildpacksio/lifecycle:$(
+    docker inspect "${name}" \
+      | jq -r '.[0].Config.Labels."io.buildpacks.builder.metadata"' \
+      | jq -r '.lifecycle.version'
+  )"
+
+  util::print::title "Pulling lifecycle image..."
+  docker pull "${lifecycle_image}"
 }
 
 function builder::create() {
