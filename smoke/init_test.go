@@ -24,7 +24,7 @@ func TestSmoke(t *testing.T) {
 
 	Expect(Builder).NotTo(Equal(""))
 
-	SetDefaultEventuallyTimeout(15 * time.Second)
+	SetDefaultEventuallyTimeout(60 * time.Second)
 
 	suite := spec.New("Smoke", spec.Parallel(), spec.Report(report.Terminal{}))
 	suite("Dotnet", testDotnet)
