@@ -86,6 +86,7 @@ function builder::create() {
   local name
   name="${1}"
 
+  util::print::title "Creating builder..."
   pack create-builder "${name}" --config "${BUILDPACKDIR}/builder.toml"
 }
 
