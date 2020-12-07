@@ -11,31 +11,16 @@ jobs:
     name: Smoke Test
     runs-on: ubuntu-latest
     steps:
-
-    - name: Install Pack
-      run: |
-        id=$(docker create buildpacksio/pack:latest)
-        sudo docker cp $id:/layers/paketo-buildpacks_go-build/targets/bin/pack /usr/local/bin/
-        docker rm -v $id
+    - name: Setup Go
+      uses: actions/setup-go@v1
+      with:
+        go-version: 1.15
 
     - name: Checkout
       uses: actions/checkout@v2
-      with:
-        path: builder-repo
 
-    - name: Checkout paketo samples
-      uses: actions/checkout@v2
-      with:
-        repository: paketo-buildpacks/samples
-        path: samples
-
-    - name: Run smoke tests
-      run: |
-        pack create-builder testbuilder --config builder-repo/builder.toml
-        pack build testapp -p samples/nodejs/yarn --builder testbuilder
-        pack build testapp -p samples/go/mod --builder testbuilder
-        pack build testapp -p samples/java/maven --builder testbuilder
-        pack build testapp -p samples/ruby/puma --builder testbuilder
+    - name: Run Smoke Tests
+      run: ./scripts/smoke.sh
 
   approve:
     name: Auto Approve
