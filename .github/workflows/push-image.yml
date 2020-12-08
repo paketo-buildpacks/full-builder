@@ -19,11 +19,8 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Install Pack
-      run: |
-        id=$(docker create buildpacksio/pack:latest)
-        sudo docker cp $id:/layers/paketo-buildpacks_go-build/targets/bin/pack /usr/local/bin/
-        docker rm -v $id
+    - name: Install Global Pack
+      uses: buildpacks/github-actions/setup-pack
 
     - name: Create Builder Image
       run: |
