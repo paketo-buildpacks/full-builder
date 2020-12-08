@@ -17,6 +17,9 @@ jobs:
       with:
         go-version: 1.15
 
+    - name: Install Global Pack
+      uses: buildpacks/github-actions/setup-pack
+
     - name: Checkout
       uses: actions/checkout@v2
 
