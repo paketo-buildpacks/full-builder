@@ -20,7 +20,7 @@ jobs:
       uses: actions/checkout@v2
 
     - name: Install Global Pack
-      uses: buildpacks/github-actions/setup-pack
+      uses: buildpacks/github-actions/setup-pack@main
 
     - name: Create Builder Image
       run: |
