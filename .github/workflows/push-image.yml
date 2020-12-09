@@ -19,14 +19,10 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
-    - name: Install Global Pack
-      uses: buildpacks/github-actions/setup-pack@main
+    - name: Run Smoke Tests
+      run: ./scripts/smoke.sh --name builder
 
-    - name: Create Builder Image
-      run: |
-        pack create-builder builder --config builder.toml
-
-    - name: Push
+    - name: Push to GCR
       env:
         GCR_PUSH_BOT_JSON_KEY: ${{ secrets.GCR_PUSH_BOT_JSON_KEY }}
       run: |
@@ -35,7 +31,7 @@ jobs:
 
         docker push "gcr.io/paketo-buildpacks/builder:full-cf"
 
-    - name: Push
+    - name: Push to Paketo Dockerhub
       env:
         PAKETO_BUILDPACKS_DOCKERHUB_USERNAME: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_USERNAME }}
         PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD }}
@@ -49,7 +45,7 @@ jobs:
         docker push "paketobuildpacks/builder:full-cf"
         docker push "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-full"
 
-    - name: Push
+    - name: Push to Cloudfoundry Dockerhub
       env:
         CLOUDFOUNDRY_DOCKERHUB_USERNAME: ${{ secrets.CLOUDFOUNDRY_DOCKERHUB_USERNAME }}
         CLOUDFOUNDRY_DOCKERHUB_PASSWORD: ${{ secrets.CLOUDFOUNDRY_DOCKERHUB_PASSWORD }}
