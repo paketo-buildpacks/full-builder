@@ -17,11 +17,18 @@ jobs:
       with:
         go-version: 1.15
 
-    - name: Install Global Pack
-      uses: buildpacks/github-actions/setup-pack@main
-
     - name: Checkout
       uses: actions/checkout@v2
+
+    - name: Get pack version
+      id: pack-version
+      run : |
+        echo "::set-output name=version::$(cat ./.github/pack-version)"
+
+    - name: Install Global Pack
+      uses: buildpacks/github-actions/setup-pack@main
+      with:
+        pack-version: ${{ steps.pack-version.outputs.version }}
 
     - name: Run Smoke Tests
       run: ./scripts/smoke.sh --name builder

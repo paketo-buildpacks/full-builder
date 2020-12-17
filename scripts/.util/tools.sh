@@ -50,7 +50,11 @@ function util::tools::pack::install() {
 
   if [[ ! -f "${dir}/pack" ]]; then
     local version
-    version="v0.15.0"
+    if [[ ! -f "${BUILDERDIR}/.github/pack-version" ]]; then
+      util::print::error "Pack version file (.github/pack-version) not found"
+    fi
+
+    version="v$(cat "${BUILDERDIR}"/.github/pack-version)"
 
     util::print::title "Installing pack ${version}"
     curl "https://github.com/buildpacks/pack/releases/download/${version}/pack-${version}-${os}.tgz" \
