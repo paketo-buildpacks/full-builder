@@ -19,8 +19,15 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v2
 
+    - name: Get pack version
+      id: pack-version
+      run : |
+        echo "::set-output name=version::$(cat ./.github/pack-version)"
+
     - name: Install Global Pack
       uses: buildpacks/github-actions/setup-pack@main
+      with:
+        pack-version: ${{ steps.pack-version.outputs.version }}
 
     - name: Create Builder Image
       run: |
