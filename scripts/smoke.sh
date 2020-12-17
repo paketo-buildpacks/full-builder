@@ -4,7 +4,7 @@ set -eu
 set -o pipefail
 
 readonly PROGDIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
-readonly BUILDPACKDIR="$(cd "${PROGDIR}/.." && pwd)"
+readonly BUILDERDIR="$(cd "${PROGDIR}/.." && pwd)"
 
 # shellcheck source=SCRIPTDIR/.util/tools.sh
 source "${PROGDIR}/.util/tools.sh"
@@ -38,7 +38,7 @@ function main() {
     esac
   done
 
-  if [[ ! -d "${BUILDPACKDIR}/smoke" ]]; then
+  if [[ ! -d "${BUILDERDIR}/smoke" ]]; then
       util::print::warn "** WARNING  No Smoke tests **"
   fi
 
@@ -66,7 +66,15 @@ USAGE
 
 function tools::install() {
   util::tools::pack::install \
-    --directory "${BUILDPACKDIR}/.bin"
+    --directory "${BUILDERDIR}/.bin"
+}
+
+function builder::create() {
+  local name
+  name="${1}"
+
+  util::print::title "Creating builder..."
+  pack create-builder "${name}" --config "${BUILDERDIR}/builder.toml"
 }
 
 function image::pull::lifecycle() {
@@ -82,22 +90,14 @@ function image::pull::lifecycle() {
   docker pull "${lifecycle_image}"
 }
 
-function builder::create() {
-  local name
-  name="${1}"
-
-  util::print::title "Creating builder..."
-  pack create-builder "${name}" --config "${BUILDPACKDIR}/builder.toml"
-}
-
 function tests::run() {
   local name
   name="${1}"
 
-  util::print::title "Run Buildpack Runtime Integration Tests"
+  util::print::title "Run Builder Smoke Tests"
 
   testout=$(mktemp)
-  pushd "${BUILDPACKDIR}" > /dev/null
+  pushd "${BUILDERDIR}" > /dev/null
     if GOMAXPROCS="${GOMAXPROCS:-4}" go test -count=1 -timeout 0 ./smoke/... -v -run Smoke --name "${name}" | tee "${testout}"; then
       util::tools::tests::checkfocus "${testout}"
       util::print::success "** GO Test Succeeded **"
