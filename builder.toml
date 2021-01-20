@@ -5,8 +5,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "0.0.9"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/go:0.3.0"
-  version = "0.3.0"
+  image = "gcr.io/paketo-buildpacks/go:0.3.1"
+  version = "0.3.1"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/httpd:0.0.167"
@@ -37,8 +37,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "3.0.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/ruby:0.3.0"
-  version = "0.3.0"
+  image = "gcr.io/paketo-buildpacks/ruby:0.3.1"
+  version = "0.3.1"
 
 [lifecycle]
   version = "0.10.1"
@@ -47,7 +47,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/ruby"
-    version = "0.3.0"
+    version = "0.3.1"
 
 [[order]]
 
@@ -65,7 +65,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/go"
-    version = "0.3.0"
+    version = "0.3.1"
 
 [[order]]
 
