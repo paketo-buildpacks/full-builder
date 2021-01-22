@@ -9,8 +9,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "0.3.1"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/httpd:0.0.167"
-  version = "0.0.167"
+  image = "gcr.io/paketo-buildpacks/httpd:0.0.168"
+  version = "0.0.168"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/java-native-image:4.7.0"
@@ -21,12 +21,12 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "4.9.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/nginx:0.0.195"
-  version = "0.0.195"
+  image = "gcr.io/paketo-buildpacks/nginx:0.0.196"
+  version = "0.0.196"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/nodejs:0.0.11"
-  version = "0.0.11"
+  image = "gcr.io/paketo-buildpacks/nodejs:0.0.12"
+  version = "0.0.12"
 
 [[buildpacks]]
   image = "gcr.io/paketo-buildpacks/php:0.1.0"
@@ -59,7 +59,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/nodejs"
-    version = "0.0.11"
+    version = "0.0.12"
 
 [[order]]
 
@@ -77,13 +77,13 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/nginx"
-    version = "0.0.195"
+    version = "0.0.196"
 
 [[order]]
 
   [[order.group]]
     id = "paketo-buildpacks/httpd"
-    version = "0.0.167"
+    version = "0.0.168"
 
 [[order]]
 
