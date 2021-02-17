@@ -1,4 +1,3 @@
 CODEOWNERS
 dependabot.yml
-pack-version
 workflows/push-image.yml
