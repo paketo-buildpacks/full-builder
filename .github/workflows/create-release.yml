@@ -32,7 +32,6 @@ jobs:
 
     - name: Run Smoke Tests
       run: ./scripts/smoke.sh --name builder
-
     - name: Generate Release Notes
       id: notes
       run: |

@@ -33,4 +33,3 @@ jobs:
         current-repo: current-repo
         config-path: "/builder"
         ssh-private-key: ${{ secrets.PAKETO_BOT_SSH_KEY }}
-
