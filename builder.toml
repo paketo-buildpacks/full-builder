@@ -1,43 +1,43 @@
 description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, NodeJS, Go, PHP, Ruby, Apache HTTPD, NGINX and Procfile"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/dotnet-core:0.1.1"
+  uri = "docker://gcr.io/paketo-buildpacks/dotnet-core:0.1.1"
   version = "0.1.1"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/go:0.3.2"
-  version = "0.3.2"
+  uri = "docker://gcr.io/paketo-buildpacks/go:0.4.0"
+  version = "0.4.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/httpd:0.0.168"
+  uri = "docker://gcr.io/paketo-buildpacks/httpd:0.0.168"
   version = "0.0.168"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/java-native-image:5.0.0"
+  uri = "docker://gcr.io/paketo-buildpacks/java-native-image:5.0.0"
   version = "5.0.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/java:5.1.0"
+  uri = "docker://gcr.io/paketo-buildpacks/java:5.1.0"
   version = "5.1.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/nginx:0.0.199"
+  uri = "docker://gcr.io/paketo-buildpacks/nginx:0.0.199"
   version = "0.0.199"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/nodejs:0.1.0"
+  uri = "docker://gcr.io/paketo-buildpacks/nodejs:0.1.0"
   version = "0.1.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/php:0.1.1"
+  uri = "docker://gcr.io/paketo-buildpacks/php:0.1.1"
   version = "0.1.1"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/procfile:4.0.0"
+  uri = "docker://gcr.io/paketo-buildpacks/procfile:4.0.0"
   version = "4.0.0"
 
 [[buildpacks]]
-  image = "gcr.io/paketo-buildpacks/ruby:0.3.1"
+  uri = "docker://gcr.io/paketo-buildpacks/ruby:0.3.1"
   version = "0.3.1"
 
 [lifecycle]
@@ -65,7 +65,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/go"
-    version = "0.3.2"
+    version = "0.4.0"
 
 [[order]]
 
@@ -104,7 +104,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
     version = "4.0.0"
 
 [stack]
+  build-image = "docker.io/paketobuildpacks/build:1.1.5-full-cnb"
   id = "io.buildpacks.stacks.bionic"
-  build-image = "docker.io/paketobuildpacks/build:1.1.4-full-cnb"
   run-image = "index.docker.io/paketobuildpacks/run:full-cnb"
   run-image-mirrors = ["gcr.io/paketo-buildpacks/run:full-cnb"]
