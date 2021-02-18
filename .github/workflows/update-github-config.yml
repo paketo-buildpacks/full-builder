@@ -1,0 +1,36 @@
+name: Update shared github-config
+
+on:
+  schedule:
+  - cron: '*/15 * * * *'
+  workflow_dispatch: {}
+
+jobs:
+  build:
+    name: Create PR to update shared files
+    runs-on: ubuntu-latest
+    steps:
+
+    # checkout paketo github-config as src-repo
+    - name: Checkout paketo github-config repo
+      uses: actions/checkout@v2
+      with:
+        repository: paketo-buildpacks/github-config
+        path: config-repo
+
+    # checkout this repo
+    - name: Checkout
+      uses: actions/checkout@v2
+      with:
+        path: current-repo
+
+    - name: Run the sync action for shared workflows
+      uses: paketo-buildpacks/github-config/actions/sync@main
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
+      with:
+        config-repo: config-repo
+        current-repo: current-repo
+        config-path: "/builder"
+        ssh-private-key: ${{ secrets.PAKETO_BOT_SSH_KEY }}
+
