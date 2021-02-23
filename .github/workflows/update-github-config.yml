@@ -31,7 +31,7 @@ jobs:
       uses: paketo-buildpacks/github-config/actions/sync@sync-action
       with:
         workspace: /github/workspace
-        config: /github/workspace/github-config/implementation
+        config: /github/workspace/github-config/builder
 
     - name: Cleanup
       run: rm -rf github-config
