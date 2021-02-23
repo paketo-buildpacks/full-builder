@@ -27,6 +27,8 @@ jobs:
       with:
         message: "Update builder.toml"
         pathspec: "builder.toml"
+        keyid: ${{ secrets.PAKETO_BOT_GPG_SIGNING_KEY_ID }}
+        key: ${{ secrets.PAKETO_BOT_GPG_SIGNING_KEY }}
 
     - name: Git push
       if: ${{ steps.commit.outputs.commit_sha != '' }}
