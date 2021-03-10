@@ -5,7 +5,7 @@
 ```bash
 pack build applications/native-image \
   --builder paketobuildpacks/builder:tiny \
-  --env BP_BOOT_NATIVE_IMAGE=true
+  --env BP_NATIVE_IMAGE=true
 ```
 
 ## Running
