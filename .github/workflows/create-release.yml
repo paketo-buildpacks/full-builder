@@ -23,7 +23,8 @@ jobs:
     - name: Get pack version
       id: pack-version
       run : |
-        echo "::set-output name=version::$(cat ./.github/pack-version)"
+        version=$(jq -r .pack "scripts/.util/tools.json")
+        echo "::set-output name=version::${version#v}"
 
     - name: Install Global Pack
       uses: buildpacks/github-actions/setup-pack@main
