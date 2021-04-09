@@ -69,7 +69,7 @@ func testPHP(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Distribution Buildpack")))
 			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Web Buildpack")))
 		})
 	})
