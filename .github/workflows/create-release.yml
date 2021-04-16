@@ -63,7 +63,7 @@ jobs:
     - name: Tag
       id: tag
       if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
-      uses: paketo-buildpacks/github-config/actions/tag@main
+      uses: paketo-buildpacks/github-config/actions/tag/increment-tag@main
     - name: Create Release
       if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
       uses: paketo-buildpacks/github-config/actions/release/create@main
