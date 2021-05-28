@@ -19,7 +19,7 @@ jobs:
         branch: "automation/builder-toml"
 
     - name: Update builder.toml
-      uses: paketo-buildpacks/github-config/actions/builder/update@main
+      uses: paketo-buildpacks/github-config/actions/builder/update@update-action-jam
 
     - name: Git commit
       id: commit
