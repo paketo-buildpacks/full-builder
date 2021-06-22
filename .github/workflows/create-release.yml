@@ -5,6 +5,8 @@ on:
     branches:
     - main
 
+concurrency: release
+
 jobs:
   smoke:
     name: Smoke Test
