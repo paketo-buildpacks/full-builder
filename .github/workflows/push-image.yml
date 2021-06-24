@@ -21,7 +21,7 @@ jobs:
 
     - name: Get pack version
       id: pack-version
-      run : |
+      run: |
         version=$(jq -r .pack "scripts/.util/tools.json")
         echo "::set-output name=version::${version#v}"
 
@@ -69,4 +69,3 @@ jobs:
 
         docker push "cloudfoundry/cnb:full-cf"
         docker push "cloudfoundry/cnb:cflinuxfs3"
-
