@@ -1,0 +1,25 @@
+# Config for https://github.com/release-drafter/release-drafter
+name-template: '$RESOLVED_VERSION'
+tag-template: '$RESOLVED_VERSION'
+filter-by-commitish: true
+commitish: main
+
+change-template: '- $TITLE [#$NUMBER] by [@$AUTHOR](https://github.com/$AUTHOR)'
+template: |
+  ## Full Changelog
+
+  Following pull requests got merged for this release:
+
+  $CHANGES
+
+version-resolver:
+  major:
+    labels:
+      - 'major'
+  minor:
+    labels:
+      - 'minor'
+  patch:
+    labels:
+      - 'patch'
+  default: patch

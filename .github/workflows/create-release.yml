@@ -38,10 +38,13 @@ jobs:
     - name: Generate Release Notes
       id: notes
       run: |
-        notes="$(pack inspect-builder builder | grep -v 'Inspecting builder' | grep -v 'REMOTE:' | grep -v 'LOCAL:' | grep -v '\(not present\)' | sed -e '/./,$!d')"
-        notes="${notes//'%'/'%25'}"
-        notes="${notes//$'\n'/'%0A'}"
-        notes="${notes//$'\r'/'%0D'}"
+        notes="$(pack inspect-builder builder | grep -v 'Inspecting builder' \
+          | grep -v 'REMOTE:' \
+          | grep -v 'LOCAL:' \
+          | grep -v '\(not present\)' \
+          | grep -v 'Warning' \
+          | sed -e '/./,$!d' \
+          | awk -F, '{printf "%s\\n", $0}')"
         echo "::set-output name=body::${notes}"
 
   release:
@@ -62,21 +65,28 @@ jobs:
         else
           echo "::set-output name=builder_changes::true"
         fi
-    - name: Tag
-      id: tag
+    - name: Publish Release
+      id: publish
       if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
-      uses: paketo-buildpacks/github-config/actions/tag/increment-tag@main
-    - name: Create Release
-      if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
-      uses: paketo-buildpacks/github-config/actions/release/create@main
+      uses: release-drafter/release-drafter@v5
       with:
-        repo: ${{ github.repository }}
-        token: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
-        tag_name: v${{ steps.tag.outputs.tag }}
-        target_commitish: ${{ github.sha }}
-        name: v${{ steps.tag.outputs.tag }}
-        body: |
-          ```
-          ${{ needs.smoke.outputs.release_notes }}
-          ```
-        draft: false
+        config-name: release-drafter-config.yml
+        publish: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
+    - name: Update Release Notes
+      if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
+      run: |
+        set -e
+        payload="{\"body\" : \"\`\`\`\n${RELEASE_BODY}\n\`\`\`\"}"
+
+        curl --fail \
+          -X PATCH \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${GITHUB_TOKEN}" \
+          "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}" \
+          -d "${payload}"
+      env:
+        RELEASE_ID: ${{ steps.publish.outputs.id }}
+        RELEASE_BODY: ${{ needs.smoke.outputs.release_notes }}
+        GITHUB_TOKEN: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
