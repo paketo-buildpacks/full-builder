@@ -24,7 +24,7 @@ jobs:
 
     - name: Get pack version
       id: pack-version
-      run : |
+      run: |
         version=$(jq -r .pack "scripts/.util/tools.json")
         echo "::set-output name=version::${version#v}"
 
@@ -52,7 +52,7 @@ jobs:
     - name: Checkout With History
       uses: actions/checkout/@v2
       with:
-        fetch-depth: 0 # gets full history
+        fetch-depth: 0  # gets full history
     - name: Compare With Previous Release
       id: compare_previous_release
       run: |
