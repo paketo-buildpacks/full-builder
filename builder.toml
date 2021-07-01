@@ -1,0 +1,10 @@
+description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, NodeJS, Go, PHP, Ruby, Apache HTTPD, NGINX and Procfile"
+
+[lifecycle]
+  version = "0.11.3"
+
+[stack]
+  build-image = "docker.io/paketobuildpacks/build:1.2.14-full-cnb"
+  id = "io.buildpacks.stacks.bionic"
+  run-image = "index.docker.io/paketobuildpacks/run:full-cnb"
+  run-image-mirrors = ["gcr.io/paketo-buildpacks/run:full-cnb"]
