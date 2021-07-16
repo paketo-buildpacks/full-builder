@@ -1,4 +1,4 @@
-name: Push Builder Image
+name: Push Buildpackless Builder Image
 
 on:
   release:
