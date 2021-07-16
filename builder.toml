@@ -1,4 +1,4 @@
-description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, NodeJS, Go, PHP, Ruby, Apache HTTPD, NGINX and Procfile"
+description = "Ubuntu bionic base image with no buildpacks included. To use, specify buildpacks at build time."
 
 [lifecycle]
   version = "0.11.3"
