@@ -1,0 +1,92 @@
+name: Create Buildpackless Release
+
+on:
+  push:
+    branches:
+    - buildpackless
+
+concurrency: release
+
+jobs:
+  smoke:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    outputs:
+      release_notes: ${{ steps.notes.outputs.body }}
+    steps:
+    - name: Setup Go
+      uses: actions/setup-go@v2.1.3
+      with:
+        go-version: 1.16.x
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Get pack version
+      id: pack-version
+      run: |
+        version=$(jq -r .pack "scripts/.util/tools.json")
+        echo "::set-output name=version::${version#v}"
+
+    - name: Install Global Pack
+      uses: buildpacks/github-actions/setup-pack@main
+      with:
+        pack-version: ${{ steps.pack-version.outputs.version }}
+
+    - name: Run Smoke Tests
+      run: ./scripts/smoke.sh --name builder
+    - name: Generate Release Notes
+      id: notes
+      run: |
+        notes="$(pack inspect-builder builder | grep -v 'Inspecting builder' \
+          | grep -v 'REMOTE:' \
+          | grep -v 'LOCAL:' \
+          | grep -v '\(not present\)' \
+          | grep -v 'Warning' \
+          | sed -e '/./,$!d' \
+          | awk -F, '{printf "%s\\n", $0}')"
+        echo "::set-output name=body::${notes}"
+
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    needs: smoke
+    steps:
+    - name: Checkout With History
+      uses: actions/checkout/@v2
+      with:
+        fetch-depth: 0  # gets full history
+    - name: Compare With Previous Release
+      id: compare_previous_release
+      run: |
+        if [ -z "$(git diff $(git describe --tags --abbrev=0) -- builder.toml)" ]
+        then
+          echo "::set-output name=builder_changes::false"
+        else
+          echo "::set-output name=builder_changes::true"
+        fi
+    - name: Publish Release
+      id: publish
+      if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
+      uses: release-drafter/release-drafter@v5
+      with:
+        config-name: release-drafter-config-buildpackless.yml
+        publish: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
+    - name: Update Release Notes
+      if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
+      run: |
+        set -e
+        payload="{\"body\" : \"\`\`\`\n${RELEASE_BODY}\n\`\`\`\"}"
+
+        curl --fail \
+          -X PATCH \
+          -H "Accept: application/vnd.github.v3+json" \
+          -H "Authorization: token ${GITHUB_TOKEN}" \
+          "https://api.github.com/repos/${GITHUB_REPOSITORY}/releases/${RELEASE_ID}" \
+          -d "${payload}"
+      env:
+        RELEASE_ID: ${{ steps.publish.outputs.id }}
+        RELEASE_BODY: ${{ needs.smoke.outputs.release_notes }}
+        GITHUB_TOKEN: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
