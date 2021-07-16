@@ -1,0 +1,59 @@
+name: Push Builder Image
+
+on:
+  release:
+    types:
+    - published
+
+jobs:
+  push:
+    name: Push
+    runs-on: ubuntu-latest
+    steps:
+
+    - name: Parse Event
+      id: event
+      run: |
+        echo "::set-output name=tag::$(jq -r '.release.tag_name' "${GITHUB_EVENT_PATH}" | sed s/^v// | sed s/\-buildpackless$// )"
+
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: Get pack version
+      id: pack-version
+      run: |
+        version=$(jq -r .pack "scripts/.util/tools.json")
+        echo "::set-output name=version::${version#v}"
+
+
+    - name: Install Global Pack
+      uses: buildpacks/github-actions/setup-pack@main
+      with:
+        pack-version: ${{ steps.pack-version.outputs.version }}
+
+    - name: Create Builder Image
+      run: |
+        pack create-builder builder --config builder.toml
+
+    - name: Push to GCR
+      env:
+        GCR_PUSH_BOT_JSON_KEY: ${{ secrets.GCR_PUSH_BOT_JSON_KEY }}
+      run: |
+        echo "${GCR_PUSH_BOT_JSON_KEY}" | docker login --username _json_key --password-stdin gcr.io
+        docker tag builder "gcr.io/paketo-buildpacks/builder:buildpackless-full"
+        docker tag builder "gcr.io/paketo-buildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-full"
+
+        docker push "gcr.io/paketo-buildpacks/builder:buildpackless-full"
+        docker push "gcr.io/paketo-buildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-full"
+
+    - name: Push to Dockerhub
+      env:
+        PAKETO_BUILDPACKS_DOCKERHUB_USERNAME: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_USERNAME }}
+        PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD: ${{ secrets.PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD }}
+      run: |
+        echo "${PAKETO_BUILDPACKS_DOCKERHUB_PASSWORD}" | docker login --username "${PAKETO_BUILDPACKS_DOCKERHUB_USERNAME}" --password-stdin
+        docker tag builder "paketobuildpacks/builder:buildpackless-full"
+        docker tag builder "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-full"
+
+        docker push "paketobuildpacks/builder:buildpackless-full"
+        docker push "paketobuildpacks/builder:${{ steps.event.outputs.tag }}-buildpackless-full"
