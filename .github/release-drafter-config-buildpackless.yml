@@ -1,6 +1,6 @@
 # Config for https://github.com/release-drafter/release-drafter
-name-template: '$RESOLVED_VERSION'
-tag-template: 'v$RESOLVED_VERSION'
+name-template: 'v$RESOLVED_VERSION-buildpackless'
+tag-template: 'v$RESOLVED_VERSION-buildpackless'
 filter-by-commitish: true
 commitish: buildpackless
 
