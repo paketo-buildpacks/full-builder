@@ -16,6 +16,51 @@ function util::tools::path::export() {
   fi
 }
 
+function util::tools::jam::install () {
+  local dir
+  while [[ "${#}" != 0 ]]; do
+    case "${1}" in
+      --directory)
+        dir="${2}"
+        shift 2
+        ;;
+
+      *)
+        util::print::error "unknown argument \"${1}\""
+    esac
+  done
+
+  local os
+  case "$(uname)" in
+    "Darwin")
+      os="darwin"
+      ;;
+
+    "Linux")
+      os="linux"
+      ;;
+
+    *)
+      echo "Unknown OS \"$(uname)\""
+      exit 1
+  esac
+
+  mkdir -p "${dir}"
+  util::tools::path::export "${dir}"
+
+  if [[ ! -f "${dir}/jam" ]]; then
+    local version
+    version="$(jq -r .jam "$(dirname "${BASH_SOURCE[0]}")/tools.json")"
+
+    util::print::title "Installing jam ${version}"
+    curl "https://github.com/paketo-buildpacks/jam/releases/download/${version}/jam-${os}" \
+      --silent \
+      --location \
+      --output "${dir}/jam"
+    chmod +x "${dir}/jam"
+  fi
+}
+
 function util::tools::pack::install() {
   local dir
   while [[ "${#}" != 0 ]]; do

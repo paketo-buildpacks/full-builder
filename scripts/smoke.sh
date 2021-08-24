@@ -69,7 +69,7 @@ function tools::install() {
     --directory "${BUILDERDIR}/.bin"
 
   util::tools::jam::install \
-    --directory "${BUILDPACKDIR}/.bin"
+    --directory "${BUILDERDIR}/.bin"
 }
 
 function builder::create() {
