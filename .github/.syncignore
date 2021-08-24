@@ -1,5 +1,0 @@
-CODEOWNERS
-dependabot.yml
-workflows/push-image.yml
-workflows/create-release.yml
-release-drafter-config.yml
