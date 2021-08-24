@@ -2,7 +2,4 @@ CODEOWNERS
 dependabot.yml
 workflows/push-image.yml
 workflows/create-release.yml
-workflows/update-builder-toml-buildpackless.yml
-workflows/test-pull-request.yml
 release-drafter-config.yml
-release-drafter-config-buildpackless.yml
