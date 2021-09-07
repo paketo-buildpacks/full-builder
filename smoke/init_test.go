@@ -36,6 +36,7 @@ func TestSmoke(t *testing.T) {
 	suite("Nodejs", testNodejs)
 	suite("PHP", testPHP)
 	suite("Procfile", testProcfile)
+	suite("Python", testPython)
 	suite("Ruby", testRuby)
 	suite.Run(t)
 }
