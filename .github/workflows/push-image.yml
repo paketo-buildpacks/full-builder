@@ -33,7 +33,7 @@ jobs:
 
     - name: Create Builder Image
       run: |
-        pack create-builder builder --config builder.toml
+        pack builder create builder --config builder.toml
 
     - name: Push
       env:
