@@ -33,8 +33,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "0.5.6"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/procfile:4.4.0"
-  version = "4.4.0"
+  uri = "docker://gcr.io/paketo-buildpacks/procfile:4.4.1"
+  version = "4.4.1"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/python:0.8.1"
@@ -111,7 +111,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/procfile"
-    version = "4.4.0"
+    version = "4.4.1"
 
 [stack]
   build-image = "docker.io/paketobuildpacks/build:1.2.46-full-cnb"
