@@ -29,8 +29,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "0.9.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/php:0.5.7"
-  version = "0.5.7"
+  uri = "docker://gcr.io/paketo-buildpacks/php:0.5.8"
+  version = "0.5.8"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/procfile:4.4.1"
@@ -81,7 +81,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/php"
-    version = "0.5.7"
+    version = "0.5.8"
 
 [[order]]
 
