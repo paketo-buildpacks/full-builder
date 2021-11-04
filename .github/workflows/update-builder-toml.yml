@@ -2,7 +2,7 @@ name: Update builder.toml and Send Pull Request
 
 on:
   schedule:
-  - cron: '*/15 * * * *'
+  - cron: '10 */1 * * *'
   workflow_dispatch: {}
 
 jobs:
