@@ -1,8 +1,8 @@
 description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, NodeJS, Go, Python, PHP, Ruby, Apache HTTPD, NGINX and Procfile"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/dotnet-core:0.10.3"
-  version = "0.10.3"
+  uri = "docker://gcr.io/paketo-buildpacks/dotnet-core:0.10.4"
+  version = "0.10.4"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/go:0.13.2"
@@ -57,7 +57,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/dotnet-core"
-    version = "0.10.3"
+    version = "0.10.4"
 
 [[order]]
 
