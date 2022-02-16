@@ -67,9 +67,6 @@ USAGE
 function tools::install() {
   util::tools::pack::install \
     --directory "${BUILDERDIR}/.bin"
-
-  util::tools::jam::install \
-    --directory "${BUILDERDIR}/.bin"
 }
 
 function builder::create() {
