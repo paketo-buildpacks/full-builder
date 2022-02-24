@@ -20,6 +20,8 @@ jobs:
 
     - name: Update builder.toml
       uses: paketo-buildpacks/github-config/actions/builder/update@main
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
 
     - name: Git commit
       id: commit
