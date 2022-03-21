@@ -15,11 +15,11 @@ template: |
 version-resolver:
   major:
     labels:
-      - 'major'
+      - 'semver:major'
   minor:
     labels:
-      - 'minor'
+      - 'semver:minor'
   patch:
     labels:
-      - 'patch'
+      - 'semver:patch'
   default: patch
