@@ -5,6 +5,8 @@ on:
   - cron: '10 */1 * * *'
   workflow_dispatch: {}
 
+concurrency: builder_update
+
 jobs:
   update:
     name: Update builder.toml
