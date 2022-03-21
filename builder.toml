@@ -86,6 +86,11 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 [[order]]
 
   [[order.group]]
+    id = "paketo-buildpacks/watchexec"
+    version = "2.3.3"
+    optional = true
+
+  [[order.group]]
     id = "paketo-buildpacks/httpd"
     version = "0.3.0"
 
