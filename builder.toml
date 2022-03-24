@@ -45,8 +45,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "0.11.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/watchexec:2.3.3"
-  version = "2.3.3"
+  uri = "docker://gcr.io/paketo-buildpacks/watchexec:2.3.4"
+  version = "2.3.4"
 
 [lifecycle]
   version = "0.13.5"
@@ -86,7 +86,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   [[order.group]]
     id = "paketo-buildpacks/watchexec"
     optional = true
-    version = "2.3.3"
+    version = "2.3.4"
 
   [[order.group]]
     id = "paketo-buildpacks/nginx"
@@ -97,7 +97,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   [[order.group]]
     id = "paketo-buildpacks/watchexec"
     optional = true
-    version = "2.3.3"
+    version = "2.3.4"
 
   [[order.group]]
     id = "paketo-buildpacks/httpd"
