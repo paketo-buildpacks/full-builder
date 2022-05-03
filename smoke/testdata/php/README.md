@@ -2,7 +2,7 @@
 
 ## Building
 
-`pack build php-webserver-sample --buildpack gcr.io/paketo-buildpacks/php`
+`pack build php-webserver-sample --env BP_PHP_WEB_DIR=htdocs --buildpack gcr.io/paketo-buildpacks/php`
 
 ## Running
 

@@ -57,6 +57,9 @@ func testPHP(t *testing.T, context spec.G, it spec.S) {
 			var logs fmt.Stringer
 			image, logs, err = pack.Build.
 				WithPullPolicy("never").
+				WithEnv(map[string]string{
+					"BP_PHP_WEB_DIR": "htdocs",
+				}).
 				WithBuilder(Builder).
 				Execute(name, source)
 			Expect(err).ToNot(HaveOccurred(), logs.String)
@@ -70,7 +73,7 @@ func testPHP(t *testing.T, context spec.G, it spec.S) {
 			Eventually(container).Should(BeAvailable())
 
 			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Distribution Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Web Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Built-in Server Buildpack")))
 		})
 	})
 }
