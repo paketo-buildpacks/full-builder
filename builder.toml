@@ -9,20 +9,12 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "1.4.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/httpd:0.4.1"
-  version = "0.4.1"
-
-[[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/java-native-image:7.17.0"
   version = "7.17.0"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/java:6.21.0"
   version = "6.21.0"
-
-[[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/nginx:0.7.0"
-  version = "0.7.0"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/nodejs:0.17.1"
@@ -47,6 +39,10 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/watchexec:2.4.0"
   version = "2.4.0"
+
+[[buildpacks]]
+  uri = "docker://gcr.io/paketo-buildpacks/web-servers:0.0.2"
+  version = "0.0.2"
 
 [lifecycle]
   version = "0.14.0"
@@ -84,24 +80,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 [[order]]
 
   [[order.group]]
-    id = "paketo-buildpacks/watchexec"
-    optional = true
-    version = "2.4.0"
-
-  [[order.group]]
-    id = "paketo-buildpacks/nginx"
-    version = "0.7.0"
-
-[[order]]
-
-  [[order.group]]
-    id = "paketo-buildpacks/watchexec"
-    optional = true
-    version = "2.4.0"
-
-  [[order.group]]
-    id = "paketo-buildpacks/httpd"
-    version = "0.4.1"
+    id = "paketo-buildpacks/web-servers"
+    version = "0.0.2"
 
 [[order]]
 
