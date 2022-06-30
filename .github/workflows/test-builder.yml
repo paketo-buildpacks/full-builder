@@ -1,0 +1,21 @@
+name: Test Builder
+
+on:
+  workflow_dispatch: {}
+
+jobs:
+
+  smoke:
+    name: Smoke Test
+    runs-on: ubuntu-latest
+    steps:
+    - name: Setup Go
+      uses: actions/setup-go@v3
+      with:
+        go-version: 1.18.x
+
+    - name: Checkout
+      uses: actions/checkout@v3
+
+    - name: Run Smoke Tests
+      run: ./scripts/smoke.sh

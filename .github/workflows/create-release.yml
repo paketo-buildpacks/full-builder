@@ -94,3 +94,22 @@ jobs:
         RELEASE_ID: ${{ steps.publish.outputs.id }}
         RELEASE_BODY: ${{ needs.smoke.outputs.release_notes }}
         GITHUB_TOKEN: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
+
+  failure:
+    name: Alert on Failure
+    runs-on: ubuntu-latest
+    needs: [ smoke, release ]
+    if: ${{ always() && needs.smoke.result == 'failure' ||  needs.release.result == 'failure' }}
+    steps:
+    - name: File Failure Alert Issue
+      uses: paketo-buildpacks/github-config/actions/issue/file@main
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repo: ${{ github.repository }}
+        label: "failure:release"
+        comment_if_exists: true
+        issue_title: "Failure: Create Release workflow"
+        issue_body: |
+          Create Release workflow [failed](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}).
+        comment_body: |
+           Another failure occurred: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
