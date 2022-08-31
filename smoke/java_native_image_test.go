@@ -70,11 +70,11 @@ func testJavaNativeImage(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo BellSoft Liberica Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Maven Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Executable JAR Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Spring Boot Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Native Image Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for BellSoft Liberica")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Maven")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Executable JAR")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Spring Boot")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Native Image")))
 		})
 	})
 }

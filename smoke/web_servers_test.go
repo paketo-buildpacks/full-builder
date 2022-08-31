@@ -69,7 +69,7 @@ func testWebServers(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Apache HTTP Server Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Apache HTTP Server")))
 		})
 	})
 
@@ -115,7 +115,7 @@ func testWebServers(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Nginx Server Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Nginx Server")))
 		})
 	})
 
@@ -160,10 +160,10 @@ func testWebServers(t *testing.T, context spec.G, it spec.S) {
 					Execute(name, source)
 				Expect(err).ToNot(HaveOccurred(), logs.String)
 
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo Node Engine Buildpack")))
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo NPM Install Buildpack")))
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo Node Run Script Buildpack")))
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo Apache HTTP Server Buildpack")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Node Engine")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for NPM Install")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Node Run Script")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Apache HTTP Server")))
 
 				container, err = docker.Container.Run.
 					WithEnv(map[string]string{"PORT": "8080"}).
@@ -194,10 +194,10 @@ func testWebServers(t *testing.T, context spec.G, it spec.S) {
 					Execute(name, source)
 				Expect(err).ToNot(HaveOccurred(), logs.String)
 
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo Node Engine Buildpack")))
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo NPM Install Buildpack")))
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo Node Run Script Buildpack")))
-				Expect(logs).To(ContainLines(ContainSubstring("Paketo Nginx Server Buildpack")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Node Engine")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for NPM Install")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Node Run Script")))
+				Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Nginx Server")))
 
 				container, err = docker.Container.Run.
 					WithEnv(map[string]string{"PORT": "8080"}).

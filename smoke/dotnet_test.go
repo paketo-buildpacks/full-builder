@@ -69,8 +69,8 @@ func testDotnet(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo .NET Core Runtime Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo .NET Execute Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for .NET Core Runtime")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for .NET Execute")))
 		})
 	})
 }

@@ -72,8 +72,8 @@ func testPHP(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Distribution Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo PHP Built-in Server Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for PHP Distribution")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for PHP Built-in Server")))
 		})
 	})
 }
