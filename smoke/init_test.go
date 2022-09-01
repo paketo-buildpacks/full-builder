@@ -5,11 +5,11 @@ import (
 	"testing"
 	"time"
 
+	"github.com/onsi/gomega/format"
 	"github.com/sclevine/spec"
 	"github.com/sclevine/spec/report"
 
 	. "github.com/onsi/gomega"
-	"github.com/onsi/gomega/format"
 )
 
 var Builder string
@@ -20,7 +20,6 @@ func init() {
 
 func TestSmoke(t *testing.T) {
 	format.MaxLength = 0
-
 	Expect := NewWithT(t).Expect
 
 	flag.Parse()
