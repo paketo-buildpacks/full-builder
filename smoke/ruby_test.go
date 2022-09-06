@@ -69,10 +69,10 @@ func testRuby(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo MRI Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Bundler Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Bundle Install Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Puma Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for MRI")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Bundler")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Bundle Install")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Puma")))
 		})
 	})
 }
