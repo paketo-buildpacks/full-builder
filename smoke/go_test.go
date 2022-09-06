@@ -69,9 +69,9 @@ func testGo(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Go Distribution Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Go Mod Vendor Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Go Build Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Go Distribution")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Go Build")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Go Mod Vendor")))
 		})
 	})
 }
