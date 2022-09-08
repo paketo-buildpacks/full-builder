@@ -10,7 +10,7 @@ concurrency: release
 jobs:
   smoke:
     name: Smoke Test
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     outputs:
       release_notes: ${{ steps.notes.outputs.body }}
     steps:
@@ -50,7 +50,7 @@ jobs:
 
   release:
     name: Release
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: smoke
     steps:
     - name: Checkout With History
@@ -97,7 +97,7 @@ jobs:
 
   failure:
     name: Alert on Failure
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     needs: [ smoke, release ]
     if: ${{ always() && needs.smoke.result == 'failure' ||  needs.release.result == 'failure' }}
     steps:
