@@ -10,7 +10,7 @@ concurrency: builder_update
 jobs:
   update:
     name: Update builder.toml
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-22.04
     steps:
     - name: Check out
       uses: actions/checkout@v3
