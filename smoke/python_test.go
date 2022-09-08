@@ -69,10 +69,10 @@ func testPython(t *testing.T, context spec.G, it spec.S) {
 
 			Eventually(container).Should(BeAvailable())
 
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo CPython Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Pipenv Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Pipenv Install Buildpack")))
-			Expect(logs).To(ContainLines(ContainSubstring("Paketo Python Start Buildpack")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for CPython")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Pipenv")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Pipenv Install")))
+			Expect(logs).To(ContainLines(ContainSubstring("Paketo Buildpack for Python Start")))
 		})
 	})
 }
