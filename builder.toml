@@ -41,7 +41,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "0.2.0"
 
 [lifecycle]
-  version = "0.14.1"
+  version = "0.14.2"
 
 [[order]]
 
