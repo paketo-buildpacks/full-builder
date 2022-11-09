@@ -5,8 +5,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "0.25.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/go:3.0.2"
-  version = "3.0.2"
+  uri = "docker://gcr.io/paketo-buildpacks/go:3.1.0"
+  version = "3.1.0"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/java-native-image:7.37.0"
@@ -59,7 +59,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/go"
-    version = "3.0.2"
+    version = "3.1.0"
 
 [[order]]
 
