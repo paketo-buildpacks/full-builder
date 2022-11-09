@@ -26,7 +26,7 @@ jobs:
       id: pack-version
       run: |
         version=$(jq -r .pack "scripts/.util/tools.json")
-        echo "::set-output name=version::${version#v}"
+        echo "version=${version#v}" >> "$GITHUB_OUTPUT"
 
     - name: Install Global Pack
       uses: buildpacks/github-actions/setup-pack@main
@@ -46,7 +46,7 @@ jobs:
           | grep -v 'Warning' \
           | sed -e '/./,$!d' \
           | awk -F, '{printf "%s\\n", $0}')"
-        echo "::set-output name=body::${notes}"
+        echo "body=${notes}" >> "$GITHUB_OUTPUT"
 
   release:
     name: Release
@@ -63,9 +63,9 @@ jobs:
       run: |
         if [ -z "$(git diff $(git describe --tags --abbrev=0) -- builder.toml)" ]
         then
-          echo "::set-output name=builder_changes::false"
+          echo "builder_changes=false" >> "$GITHUB_OUTPUT"
         else
-          echo "::set-output name=builder_changes::true"
+          echo "builder_changes=true" >> "$GITHUB_OUTPUT"
         fi
 
     - name: Publish Release
@@ -112,4 +112,4 @@ jobs:
         issue_body: |
           Create Release workflow [failed](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}).
         comment_body: |
-           Another failure occurred: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
+          Another failure occurred: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
