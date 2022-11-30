@@ -9,12 +9,12 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "3.2.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/java-native-image:7.40.1"
-  version = "7.40.1"
+  uri = "docker://gcr.io/paketo-buildpacks/java-native-image:7.41.0"
+  version = "7.41.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/java:7.13.1"
-  version = "7.13.1"
+  uri = "docker://gcr.io/paketo-buildpacks/java:8.0.0"
+  version = "8.0.0"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/nodejs:0.27.0"
@@ -83,13 +83,13 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/java-native-image"
-    version = "7.40.1"
+    version = "7.41.0"
 
 [[order]]
 
   [[order.group]]
     id = "paketo-buildpacks/java"
-    version = "7.13.1"
+    version = "8.0.0"
 
 [[order]]
 
