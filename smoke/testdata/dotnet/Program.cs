@@ -6,7 +6,7 @@ using System.Text;
 using System.Net;
 using System.Net.Sockets;
 
-namespace runtime
+namespace dotnet
 {
     class Program
     {
