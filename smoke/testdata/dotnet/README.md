@@ -1,4 +1,4 @@
-# Dotnet Core Sample App using Runtime only
+# Dotnet Core Sample App
 
 ## Building
 

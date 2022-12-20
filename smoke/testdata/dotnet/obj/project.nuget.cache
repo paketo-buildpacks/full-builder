@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "yKLyTSCK70YKTmfk2oXKUzuu3Uy/NE5+OwqbFY/OLC9ov4PKT1ym/ijH05D0PauX9aLc854RNGy6fHcEgvQPqQ==",
+  "dgSpecHash": "2aFnD4DnC6CqdvsaM9JCv1xg28lVvfAFmGPsNrr2S7DCjP+xqBc1chTgokmcBJR6YyWF89CJoDrjoD5Wkv69mQ==",
   "success": true,
-  "projectFilePath": "/app/runtime/runtime.csproj",
+  "projectFilePath": "/home/ubuntu/workspace/paketo-buildpacks/base-builder/smoke/testdata/dotnet/dotnet.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }
