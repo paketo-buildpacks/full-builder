@@ -47,3 +47,22 @@ jobs:
         token: ${{ secrets.PAKETO_BOT_GITHUB_TOKEN }}
         title: "Updating builder.toml"
         branch: "automation/builder-toml"
+
+  failure:
+    name: Alert on Failure
+    runs-on: ubuntu-22.04
+    needs: [update]
+    if: ${{ always() && needs.update.result == 'failure' }}
+    steps:
+    - name: File Failure Alert Issue
+      uses: paketo-buildpacks/github-config/actions/issue/file@main
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        repo: ${{ github.repository }}
+        label: "failure:update"
+        comment_if_exists: true
+        issue_title: "Failure: Update Builder TOML workflow"
+        issue_body: |
+          Update Builder TOML workflow [failed](https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}).
+        comment_body: |
+           Another failure occurred: https://github.com/${{github.repository}}/actions/runs/${{github.run_id}}
