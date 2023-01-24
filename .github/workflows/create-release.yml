@@ -81,7 +81,9 @@ jobs:
     - name: Update Release Notes
       if: ${{ steps.compare_previous_release.outputs.builder_changes == 'true' }}
       run: |
-        set -e
+        set -euo pipefail
+        shopt -s inherit_errexit
+
         payload="{\"body\" : \"\`\`\`\n${RELEASE_BODY}\n\`\`\`\"}"
 
         curl --fail \
