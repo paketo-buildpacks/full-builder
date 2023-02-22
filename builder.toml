@@ -29,8 +29,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "5.5.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/python:2.7.3"
-  version = "2.7.3"
+  uri = "docker://gcr.io/paketo-buildpacks/python:2.7.4"
+  version = "2.7.4"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/ruby:0.27.0"
@@ -65,7 +65,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/python"
-    version = "2.7.3"
+    version = "2.7.4"
 
 [[order]]
 
