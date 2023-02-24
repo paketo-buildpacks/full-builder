@@ -59,7 +59,7 @@ jobs:
       with:
         token: ${{ secrets.GITHUB_TOKEN }}
         repo: ${{ github.repository }}
-        label: "failure:update"
+        label: "failure:update-builder-toml"
         comment_if_exists: true
         issue_title: "Failure: Update Builder TOML workflow"
         issue_body: |
