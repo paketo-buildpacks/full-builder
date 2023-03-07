@@ -13,7 +13,8 @@ source "${PROGDIR}/.util/tools.sh"
 source "${PROGDIR}/.util/print.sh"
 
 function main() {
-  local name
+  local name token
+  token=""
 
   while [[ "${#}" != 0 ]]; do
     case "${1}" in
@@ -25,6 +26,11 @@ function main() {
 
       --name|-n)
         name="${2}"
+        shift 2
+        ;;
+
+      --token|-t)
+        token="${2}"
         shift 2
         ;;
 
@@ -46,7 +52,8 @@ function main() {
     name="testbuilder"
   fi
 
-  tools::install
+  tools::install "${token}"
+
   builder::create "${name}"
   image::pull::lifecycle "${name}"
   tests::run "${name}"
@@ -61,12 +68,17 @@ Runs the smoke test suite.
 OPTIONS
   --help        -h         prints the command usage
   --name <name> -n <name>  sets the name of the builder that is built for testing
+  --token <token>          Token used to download assets from GitHub (e.g. jam, pack, etc) (optional)
 USAGE
 }
 
 function tools::install() {
+  local token
+  token="${1}"
+
   util::tools::pack::install \
-    --directory "${BUILDERDIR}/.bin"
+    --directory "${BUILDERDIR}/.bin" \
+    --token "${token}"
 }
 
 function builder::create() {
