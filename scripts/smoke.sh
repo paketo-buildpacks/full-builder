@@ -108,6 +108,7 @@ function tests::run() {
 
   util::print::title "Run Builder Smoke Tests"
 
+  export CGO_ENABLED=0
   testout=$(mktemp)
   pushd "${BUILDERDIR}" > /dev/null
     if GOMAXPROCS="${GOMAXPROCS:-4}" go test -count=1 -timeout 0 ./smoke/... -v -run Smoke --name "${name}" | tee "${testout}"; then
