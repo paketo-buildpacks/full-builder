@@ -1,8 +1,8 @@
 description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, NodeJS, Go, Python, PHP, Ruby, Apache HTTPD, NGINX and Procfile"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/dotnet-core:0.36.3"
-  version = "0.36.3"
+  uri = "docker://gcr.io/paketo-buildpacks/dotnet-core:0.37.0"
+  version = "0.37.0"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/go:4.3.6"
@@ -21,8 +21,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "1.6.2"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/php:2.7.2"
-  version = "2.7.2"
+  uri = "docker://gcr.io/paketo-buildpacks/php:2.8.0"
+  version = "2.8.0"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/procfile:5.6.2"
@@ -33,8 +33,8 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
   version = "2.12.0"
 
 [[buildpacks]]
-  uri = "docker://gcr.io/paketo-buildpacks/ruby:0.36.0"
-  version = "0.36.0"
+  uri = "docker://gcr.io/paketo-buildpacks/ruby:0.37.0"
+  version = "0.37.0"
 
 [[buildpacks]]
   uri = "docker://gcr.io/paketo-buildpacks/web-servers:0.15.1"
@@ -47,13 +47,13 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/ruby"
-    version = "0.36.0"
+    version = "0.37.0"
 
 [[order]]
 
   [[order.group]]
     id = "paketo-buildpacks/dotnet-core"
-    version = "0.36.3"
+    version = "0.37.0"
 
 [[order]]
 
@@ -71,7 +71,7 @@ description = "Ubuntu bionic base image with buildpacks for Java, .NET Core, Nod
 
   [[order.group]]
     id = "paketo-buildpacks/php"
-    version = "2.7.2"
+    version = "2.8.0"
 
 [[order]]
 
