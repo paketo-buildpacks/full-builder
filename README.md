@@ -1,5 +1,11 @@
 # Paketo Full Builder
 
+## ⚠️ This repository is archived. No further releases will be made! ⚠️
+
+## Use the [Paketo Jammy Full Builder](https://github.com/paketo-buildpacks/builder-jammy-full) instead.
+
+---
+
 ## `paketobuildpacks/builder:full`
 
 This builder uses the [Paketo Full
